@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
 
     private final String title = "Bank Application";
-
     private JTextField emailField;
     private JTextField passwordField;
     private JPanel mainPanel;
