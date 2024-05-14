@@ -1,5 +1,3 @@
-package main;
-
 import forms.MainFrame;
 
 import javax.swing.*;
