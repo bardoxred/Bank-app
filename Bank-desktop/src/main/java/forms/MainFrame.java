@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
 
-    private final int sizeX = 500;
-    private final int sizeY = 500;
     private final String title = "Bank Application";
 
     private JTextField emailField;
@@ -20,7 +18,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         this.setTitle(title); // tytuł
-        this.setSize(sizeX, sizeY); // wielkość okna
+        this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y); // wielkość okna
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // wyjscie po wyłączeniu
         this.setVisible(true);  // wyświetlanie okienka
         this.setLocationRelativeTo(null); // ustawienie okna na środku
@@ -50,6 +48,9 @@ public class MainFrame extends JFrame {
 
                 System.out.println(emailAdress);
                 System.out.println(passwordAdress);
+
+                new HomeFrame();
+                dispose();
 
             }
         });
