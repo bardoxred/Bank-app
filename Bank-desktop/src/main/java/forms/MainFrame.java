@@ -1,5 +1,7 @@
 package forms;
 
+import controllers.MainFrameController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,11 +11,13 @@ public class MainFrame extends JFrame {
 
     private final String title = "Bank Application";
     private JTextField emailField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
+    private JCheckBox showPasswordCheckBox;
     private JPanel mainPanel;
     private JLabel emailLabel;
     private JLabel passwordLabel;
     private JButton loginButton;
+    private MainFrameController mainFrameController = new MainFrameController();
 
     public MainFrame() {
         this.setTitle(title); // tytuł
@@ -24,7 +28,7 @@ public class MainFrame extends JFrame {
 
         // Panel główny
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(5, 1));
+        mainPanel.setLayout(new GridLayout(6, 1));
         add(mainPanel);
 
         emailLabel = new JLabel("Wpisz adres email:");
@@ -33,9 +37,22 @@ public class MainFrame extends JFrame {
         mainPanel.add(emailField);
 
         passwordLabel = new JLabel("Hasło:");
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         mainPanel.add(passwordLabel);
         mainPanel.add(passwordField);
+
+        showPasswordCheckBox = new JCheckBox("Pokaż hasło");
+        mainPanel.add(showPasswordCheckBox);
+        showPasswordCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (showPasswordCheckBox.isSelected()) {
+                    passwordField.setEchoChar((char) 0);
+                } else {
+                    passwordField.setEchoChar('*');
+                }
+            }
+        });
 
         loginButton = new JButton("Zaloguj się");
         mainPanel.add(loginButton);
@@ -47,6 +64,13 @@ public class MainFrame extends JFrame {
 
                 System.out.println(emailAdress);
                 System.out.println(passwordAdress);
+
+                String hashedEmail = mainFrameController.hashEmail(emailAdress);
+                String hashedPassword = mainFrameController.hashPassword(passwordAdress);
+                // To do poprawić szyfrowanie i dodac komentarze
+                System.out.println();
+                System.out.println(hashedEmail);
+                System.out.println(hashedPassword);
 
                 new HomeFrame();
                 dispose();
