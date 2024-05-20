@@ -1,7 +1,6 @@
 package com.bank.app.forms;
 
 import com.bank.app.controllers.MainFrameController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -21,8 +20,7 @@ public class MainFrame extends JFrame {
     private JLabel passwordLabel;
     private JButton loginButton;
 
-    private MainFrameController mainFrameController = new MainFrameController();
-
+    private final MainFrameController mainFrameController;
 
     public MainFrame(MainFrameController mainFrameController) {
         this.mainFrameController = mainFrameController;
@@ -30,7 +28,6 @@ public class MainFrame extends JFrame {
         this.setTitle(title);
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
         this.setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
@@ -72,9 +69,15 @@ public class MainFrame extends JFrame {
 
                 mainFrameController.login(emailAdress, password);
 
-                new HomeFrame();
-                dispose();
+                // Utworzenie nowego okna i zamknięcie aktualnego okna
+                SwingUtilities.invokeLater(() -> {
+                    new HomeFrame();
+                    dispose();
+                });
             }
         });
+
+        // Ustawienie widoczności na końcu konstruktora
+        this.setVisible(true);
     }
 }
