@@ -21,17 +21,11 @@ public class MainFrame extends JFrame {
     private JLabel passwordLabel;
     private JButton loginButton;
 
-    @Autowired
     private MainFrameController mainFrameController = new MainFrameController();
 
 
     public MainFrame(MainFrameController mainFrameController) {
         this.mainFrameController = mainFrameController;
-
-        if (GraphicsEnvironment.isHeadless()) {
-            System.out.println("działa w tle");
-            return;
-        }
 
         this.setTitle(title);
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y);
