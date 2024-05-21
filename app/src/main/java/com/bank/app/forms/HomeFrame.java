@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.awt.*;
 
-@Component
 public class HomeFrame extends JFrame {
 
     private final String title = "Bank Application - Home Screen";

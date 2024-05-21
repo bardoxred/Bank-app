@@ -1,28 +1,30 @@
 package com.bank.app.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
+@Table(name = "users", schema = "bank_app")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
-    private String email;
+    @Column(name = "hashed_email", nullable = false)
+    private String hashedEmail;
 
-    private String password;
+    @Column(name = "hashed_password", nullable = false)
+    private String hashedPassword;
 
-    public User() {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserData> userDataList;
 
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public User(String email, String hashedPassword) {
+        this.hashedEmail = email;
+        this.hashedPassword = hashedPassword;
     }
 }
