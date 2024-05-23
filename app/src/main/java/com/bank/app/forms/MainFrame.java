@@ -11,7 +11,8 @@ import java.awt.event.ActionListener;
 @Component
 public class MainFrame extends JFrame {
 
-    private final String title = "Bank Application";
+    private final String title = "Aplikacja Bankowa";
+
     private JTextField emailField;
     private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
@@ -19,6 +20,7 @@ public class MainFrame extends JFrame {
     private JLabel emailLabel;
     private JLabel passwordLabel;
     private JButton loginButton;
+    private JButton registerButton;
 
     private final MainFrameController mainFrameController;
 
@@ -31,7 +33,7 @@ public class MainFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(6, 1));
+        mainPanel.setLayout(new GridLayout(7, 1));
         add(mainPanel);
 
         emailLabel = new JLabel("Wpisz adres email:");
@@ -72,6 +74,18 @@ public class MainFrame extends JFrame {
                 // Utworzenie nowego okna i zamknięcie aktualnego okna
                 SwingUtilities.invokeLater(() -> {
                     new HomeFrame();
+                    dispose();
+                });
+            }
+        });
+
+        registerButton = new JButton("Zarejestruj się");
+        mainPanel.add(registerButton);
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                    new RegisterFrame();
                     dispose();
                 });
             }

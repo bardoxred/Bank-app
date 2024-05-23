@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class HomeFrame extends JFrame {
 
-    private final String title = "Bank Application - Home Screen";
+    private final String title = "Strona Główna";
 
     private JPanel homePanel;
     private JPanel balancePanel;

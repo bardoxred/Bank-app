@@ -17,4 +17,8 @@ public class MainFrameController {
     public void login(String email, String password) {
         mainFrameService.saveUser(email, password);
     }
+
+    public void register() {
+
+    }
 }
