@@ -22,18 +22,8 @@ public class RegisterFrameController {
         String hashedEmail = registerFormService.hashEmail(emailAdress);
         String hashedPassword = registerFormService.hashPassword(password);
 
-        User user = new User();
-        user.setHashedEmail(hashedEmail);
-        user.setHashedPassword(hashedPassword);
-
-        UserData userData = new UserData();
-
-        userData.setFirstName(firstName);
-        userData.setSecondName(secondName);
-        userData.setLastName(lastName);
-        userData.setBirth(birthDate);
-        userData.setPhoneNumber(phoneNumber);
-        userData.setUser(user);
+        User user = new User(hashedEmail, hashedPassword);
+        UserData userData = new UserData(firstName, secondName, lastName, birthDate, phoneNumber, user);
 
         registerFormService.registerUser(user, userData);
        }

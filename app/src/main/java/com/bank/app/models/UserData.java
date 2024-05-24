@@ -33,4 +33,13 @@ public class UserData {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
+    public UserData(String firstName, String secondName, String lastName, Date birth, String phoneNumber, User user) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.lastName = lastName;
+        this.birth = birth;
+        this.phoneNumber = phoneNumber;
+        this.user = user;
+    }
+
 }

@@ -49,8 +49,7 @@ public class RegisterFormService {
 
     @Transactional
     public void registerUser(User user, UserData userData) {
-        user = userRepository.save(user);
-        userData.setUser(user);
+        userRepository.save(user);
         userDataRepository.save(userData);
     }
 }

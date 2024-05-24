@@ -23,4 +23,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserData> userDataList;
 
+    public User(String hashedEmail, String hashedPassword) {
+        this.hashedEmail = hashedEmail;
+        this.hashedPassword = hashedPassword;
+    }
+
 }
