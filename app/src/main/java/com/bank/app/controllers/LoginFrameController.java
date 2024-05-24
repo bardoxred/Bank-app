@@ -1,6 +1,6 @@
 package com.bank.app.controllers;
 
-import com.bank.app.services.MainFrameService;
+import com.bank.app.services.LoginFrameService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +9,14 @@ import org.springframework.stereotype.Controller;
 @Controller
 @AllArgsConstructor
 @NoArgsConstructor
-public class MainFrameController {
+public class LoginFrameController {
 
     @Autowired
-    private MainFrameService mainFrameService;
+    private LoginFrameService loginFrameService;
 
     public void login(String email, String password) {
-        mainFrameService.saveUser(email, password);
     }
 
     public void register() {
-
     }
 }

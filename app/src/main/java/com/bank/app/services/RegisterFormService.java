@@ -1,23 +1,25 @@
 package com.bank.app.services;
 
 import com.bank.app.models.User;
+import com.bank.app.models.UserData;
+import com.bank.app.repositories.UserDataRepository;
 import com.bank.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Service
-public class MainFrameService {
+public class RegisterFormService {
 
     @Autowired
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public MainFrameService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserDataRepository userDataRepository;
 
     public String hash256(String input) {
         try {
@@ -45,10 +47,10 @@ public class MainFrameService {
         return hash256(password);
     }
 
-    public void saveUser(String email, String password) {
-        String hashedEmail = hashEmail(email);
-        String hashedPassword = hashPassword(password);
-        User user = new User(hashedEmail, hashedPassword);
-//        userRepository.save(user);
+    @Transactional
+    public void registerUser(User user, UserData userData) {
+        user = userRepository.save(user);
+        userData.setUser(user);
+        userDataRepository.save(userData);
     }
 }

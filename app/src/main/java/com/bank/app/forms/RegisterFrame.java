@@ -1,12 +1,14 @@
 package com.bank.app.forms;
 
-import com.bank.app.controllers.MainFrameController;
+import com.bank.app.controllers.RegisterFrameController;
 import com.toedter.calendar.JDateChooser;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class RegisterFrame extends JFrame {
 
@@ -25,9 +27,9 @@ public class RegisterFrame extends JFrame {
     private JPasswordField confirmPasswordField;
     private JButton registerButton;
     private JCheckBox showPasswordCheckBox;
-    private MainFrameController mainFrameController = new MainFrameController();
+    private RegisterFrameController registerFrameController;
 
-    public RegisterFrame(){
+    public RegisterFrame(RegisterFrameController registerFrameController) {
 
         this.setTitle(title);
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y);
@@ -35,7 +37,7 @@ public class RegisterFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
         registerPanel = new JPanel();
-        registerPanel.setLayout(new GridLayout(10,1));
+        registerPanel.setLayout(new GridLayout(10, 1));
         add(registerPanel);
 
         registerPanel.add(new JLabel("Imię: "));
@@ -55,7 +57,7 @@ public class RegisterFrame extends JFrame {
         birthField.setDateFormatString("yyyy-MM-dd");
         registerPanel.add(birthField);
 
-        phoneNumberPanel = new JPanel(new GridLayout(1,1));
+        phoneNumberPanel = new JPanel(new GridLayout(1, 1));
         registerPanel.add(new JLabel("Numer telefonu"));
         registerPanel.add(phoneNumberPanel);
         countryCodes = new JComboBox<>(new String[]{"+48", "+44"});
@@ -80,10 +82,10 @@ public class RegisterFrame extends JFrame {
         showPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (showPasswordCheckBox.isSelected()){
+                if (showPasswordCheckBox.isSelected()) {
                     passwordField.setEchoChar((char) 0);
                     confirmPasswordField.setEchoChar((char) 0);
-                }else {
+                } else {
                     passwordField.setEchoChar('*');
                     confirmPasswordField.setEchoChar('*');
                 }
@@ -95,15 +97,24 @@ public class RegisterFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(() -> {
-                    mainFrameController.register();
-                    new MainFrame(mainFrameController);
-                    dispose();
-                });
+                String firstName = firstNameField.getText();
+                String secondName = secondNameField.getText();
+                String lastName = lastNameField.getText();
+                Date birthDate = birthField.getDate();
+                String phoneNumber = countryCodes.getSelectedItem() + phoneNumberField.getText();
+                String email = emailField.getText();
+                String password = new String(passwordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                if (!password.equals(confirmPassword)) {
+                    JOptionPane.showMessageDialog(null, "Hasła się nie zgadzają");
+                    return;
+                }
+                registerFrameController.registerUser(firstName, secondName, lastName, birthDate, phoneNumber, email, password);
+                JOptionPane.showMessageDialog(null, "Pomyślnie zarejestrowano użytkownika");
+                dispose();
             }
         });
-
-
 
 
         this.setVisible(true);

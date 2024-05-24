@@ -1,7 +1,8 @@
 package com.bank.app;
 
-import com.bank.app.controllers.MainFrameController;
-import com.bank.app.forms.MainFrame;
+import com.bank.app.controllers.LoginFrameController;
+import com.bank.app.controllers.RegisterFrameController;
+import com.bank.app.forms.LoginFrame;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,8 @@ public class AppApplication {
 		new SpringApplicationBuilder(AppApplication.class).headless(false).run(args);
 	}
 	@Bean
-	public MainFrame mainFrame(MainFrameController mainFrameController) {
-		return new MainFrame(mainFrameController);
+	public LoginFrame mainFrame(LoginFrameController loginFrameController, RegisterFrameController registerFrameController) {
+		return new LoginFrame(loginFrameController, registerFrameController);
 	}
+
 }

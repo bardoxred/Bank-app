@@ -1,6 +1,7 @@
 package com.bank.app.forms;
 
-import com.bank.app.controllers.MainFrameController;
+import com.bank.app.controllers.LoginFrameController;
+import com.bank.app.controllers.RegisterFrameController;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @Component
-public class MainFrame extends JFrame {
+public class LoginFrame extends JFrame {
 
     private final String title = "Aplikacja Bankowa";
 
@@ -22,10 +23,14 @@ public class MainFrame extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
 
-    private final MainFrameController mainFrameController;
+    private final LoginFrameController loginFrameController;
+    private final RegisterFrameController registerFrameController;
 
-    public MainFrame(MainFrameController mainFrameController) {
-        this.mainFrameController = mainFrameController;
+
+    public LoginFrame(LoginFrameController loginFrameController, RegisterFrameController registerFrameController) {
+        this.loginFrameController = loginFrameController;
+        this.registerFrameController = registerFrameController;
+
 
         this.setTitle(title);
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y);
@@ -69,7 +74,7 @@ public class MainFrame extends JFrame {
                 System.out.println(emailAdress);
                 System.out.println(password);
 
-                mainFrameController.login(emailAdress, password);
+                loginFrameController.login(emailAdress, password);
 
                 // Utworzenie nowego okna i zamknięcie aktualnego okna
                 SwingUtilities.invokeLater(() -> {
@@ -85,7 +90,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(() -> {
-                    new RegisterFrame();
+                    new RegisterFrame(registerFrameController).setVisible(true);
                     dispose();
                 });
             }
