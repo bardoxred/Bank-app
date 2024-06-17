@@ -1,5 +1,6 @@
 package com.bank.app.forms;
 
+import com.bank.app.controllers.LoginFrameController;
 import com.bank.app.controllers.RegisterFrameController;
 import com.toedter.calendar.JDateChooser;
 import org.springframework.stereotype.Component;
@@ -28,8 +29,12 @@ public class RegisterFrame extends JFrame {
     private JButton registerButton;
     private JCheckBox showPasswordCheckBox;
     private RegisterFrameController registerFrameController;
+    private LoginFrame loginFrame;
 
-    public RegisterFrame(RegisterFrameController registerFrameController) {
+    public RegisterFrame(RegisterFrameController registerFrameController, LoginFrame loginFrame) {
+
+        this.registerFrameController = registerFrameController;
+        this.loginFrame = loginFrame;
 
         this.setTitle(title);
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y);
@@ -112,7 +117,11 @@ public class RegisterFrame extends JFrame {
                 }
                 registerFrameController.registerUser(firstName, secondName, lastName, birthDate, phoneNumber, email, password);
                 JOptionPane.showMessageDialog(null, "Pomyślnie zarejestrowano użytkownika");
-                dispose();
+
+                SwingUtilities.invokeLater(() -> {
+                    loginFrame.setVisible(true);
+                    dispose();
+                });
             }
         });
 

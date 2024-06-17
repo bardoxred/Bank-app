@@ -90,7 +90,7 @@ public class LoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(() -> {
-                    new RegisterFrame(registerFrameController).setVisible(true);
+                    new RegisterFrame(registerFrameController, LoginFrame.this).setVisible(true);
                     dispose();
                 });
             }
