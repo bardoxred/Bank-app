@@ -74,13 +74,15 @@ public class LoginFrame extends JFrame {
                 System.out.println(emailAdress);
                 System.out.println(password);
 
-                loginFrameController.login(emailAdress, password);
-
-                // Utworzenie nowego okna i zamknięcie aktualnego okna
-                SwingUtilities.invokeLater(() -> {
-                    new HomeFrame();
-                    dispose();
-                });
+                if (!loginFrameController.login(emailAdress, password)) {
+                    JOptionPane.showMessageDialog(null, "Nieprawidłowe logowanie");
+                } else {
+                    // Utworzenie nowego okna i zamknięcie aktualnego okna
+                    SwingUtilities.invokeLater(() -> {
+                        new HomeFrame();
+                        dispose();
+                    });
+                }
             }
         });
 

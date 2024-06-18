@@ -5,6 +5,7 @@ import com.bank.app.models.UserData;
 import com.bank.app.repositories.UserDataRepository;
 import com.bank.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,7 @@ public class RegisterFormService {
     }
 
     public String hashPassword(String password) {
-        return hash256(password);
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     @Transactional

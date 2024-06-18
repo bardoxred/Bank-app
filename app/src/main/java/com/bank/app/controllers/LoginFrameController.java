@@ -1,5 +1,6 @@
 package com.bank.app.controllers;
 
+import com.bank.app.forms.LoginFrame;
 import com.bank.app.services.LoginFrameService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,7 @@ public class LoginFrameController {
     @Autowired
     private LoginFrameService loginFrameService;
 
-    public void login(String email, String password) {
-    }
-
-    public void register() {
+    public boolean login(String email, String password) {
+        return loginFrameService.isAutorized(email, password);
     }
 }
