@@ -1,8 +1,6 @@
 package com.bank.app.controllers;
 
 
-import com.bank.app.models.User;
-import com.bank.app.models.UserData;
 import com.bank.app.services.RegisterFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
