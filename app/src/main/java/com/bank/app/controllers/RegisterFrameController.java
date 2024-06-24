@@ -16,16 +16,11 @@ public class RegisterFrameController {
     private RegisterFormService registerFormService;
 
 
-    public void registerUser(String firstName, String secondName, String lastName,
-                             Date birthDate, String phoneNumber, String emailAdress,
-                             String password) {
-        String hashedEmail = registerFormService.hashEmail(emailAdress);
-        String hashedPassword = registerFormService.hashPassword(password);
-
-        User user = new User(hashedEmail, hashedPassword);
-        UserData userData = new UserData(firstName, secondName, lastName, birthDate, phoneNumber, user);
-
-        registerFormService.registerUser(user, userData);
+    public String getErrorMessage() {
+        return registerFormService.getPasswordMessage();
     }
 
+    public boolean registerUser(String firstName, String secondName, String lastName, Date birthDate, String phoneNumber, String email, String password, String confirmPassword) {
+        return registerFormService.registerUser(firstName, secondName, lastName, birthDate, phoneNumber, email, password, confirmPassword);
+    }
 }

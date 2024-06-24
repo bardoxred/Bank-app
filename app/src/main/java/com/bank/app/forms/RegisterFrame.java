@@ -109,17 +109,19 @@ public class RegisterFrame extends JFrame {
                 String password = new String(passwordField.getPassword());
                 String confirmPassword = new String(confirmPasswordField.getPassword());
 
-                if (!password.equals(confirmPassword)) {
-                    JOptionPane.showMessageDialog(null, "Hasła się nie zgadzają");
-                    return;
-                }
-                registerFrameController.registerUser(firstName, secondName, lastName, birthDate, phoneNumber, email, password);
-                JOptionPane.showMessageDialog(null, "Pomyślnie zarejestrowano użytkownika");
+                boolean registerUser = registerFrameController.registerUser(firstName, secondName, lastName, birthDate, phoneNumber, email, password, confirmPassword);
 
-                SwingUtilities.invokeLater(() -> {
-                    loginFrame.setVisible(true);
-                    dispose();
-                });
+                if(registerUser){
+                    JOptionPane.showMessageDialog(null, "Użytkownik został zarejestrowany");
+                    SwingUtilities.invokeLater(() -> {
+                        loginFrame.setVisible(true);
+                        dispose();
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(null, registerFrameController.getErrorMessage());
+                }
+
+
             }
         });
 

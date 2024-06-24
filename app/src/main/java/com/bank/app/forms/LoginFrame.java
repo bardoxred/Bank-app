@@ -71,13 +71,9 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String emailAdress = emailField.getText();
                 String password = new String(passwordField.getPassword());
-                System.out.println(emailAdress);
-                System.out.println(password);
-
                 if (!loginFrameController.login(emailAdress, password)) {
                     JOptionPane.showMessageDialog(null, "Nieprawidłowe logowanie");
                 } else {
-                    // Utworzenie nowego okna i zamknięcie aktualnego okna
                     SwingUtilities.invokeLater(() -> {
                         new HomeFrame();
                         dispose();
