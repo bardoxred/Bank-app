@@ -1,9 +1,7 @@
 package com.bank.app.forms;
 
-import com.bank.app.controllers.LoginFrameController;
 import com.bank.app.controllers.RegisterFrameController;
 import com.toedter.calendar.JDateChooser;
-import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;

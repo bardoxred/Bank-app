@@ -24,7 +24,7 @@ public class LoginFrameService {
         if (user != null && BCrypt.checkpw(password, user.getHashedPassword())) {
             System.out.println("Poprawnie znaleziono użytkownika");
             return true;
-        }else {
+        } else {
             System.out.println("Nima");
             return false;
         }

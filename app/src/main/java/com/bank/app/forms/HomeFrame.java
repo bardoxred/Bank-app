@@ -1,7 +1,5 @@
 package com.bank.app.forms;
 
-import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.awt.*;
 

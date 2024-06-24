@@ -11,7 +11,7 @@ import java.util.Date;
 public class UserData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="userData_id")
+    @Column(name = "userData_id")
     private Long userDataId;
 
     @ManyToOne(fetch = FetchType.LAZY)

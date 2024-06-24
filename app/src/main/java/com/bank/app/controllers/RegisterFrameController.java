@@ -26,6 +26,6 @@ public class RegisterFrameController {
         UserData userData = new UserData(firstName, secondName, lastName, birthDate, phoneNumber, user);
 
         registerFormService.registerUser(user, userData);
-       }
+    }
 
 }
