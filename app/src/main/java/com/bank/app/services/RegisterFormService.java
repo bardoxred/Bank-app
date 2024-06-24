@@ -21,7 +21,7 @@ public class RegisterFormService {
     @Autowired
     private UserDataRepository userDataRepository;
 
-    private String errorPasswordMessage;
+    private String errorMessage;
 
     public String hashEmail(String email) {
         return hash256(email);
@@ -32,19 +32,20 @@ public class RegisterFormService {
     }
 
     public String getPasswordMessage() {
-        return errorPasswordMessage;
+        return errorMessage;
     }
 
     public boolean registerUser(String firstName, String secondName, String lastName, Date birthDate, String phoneNumber, String email, String password, String confirmPassword) {
 
         if (!password.equals(confirmPassword)) {
-            errorPasswordMessage = "Hasła się nie zgadzają";
+            errorMessage = "Hasła się nie zgadzają";
             return false;
         }
         String hashedEmail = hashEmail(email);
         String hashedPassword = hashPassword(password);
 
-        if (isEmailTaken(email)) {
+        if (isEmailTaken(hashedEmail)) {
+            errorMessage = "Email jest już zajęty";
             return false;
         }
 
@@ -55,8 +56,9 @@ public class RegisterFormService {
         return true;
     }
 
-    public boolean isEmailTaken(String email) {
-        return false;
+    public boolean isEmailTaken(String hashedEmail) {
+        User user = userRepository.findByHashedEmail(hashedEmail);
+        return user != null;
     }
 
     public void saveUser(User user, UserData userData) {
