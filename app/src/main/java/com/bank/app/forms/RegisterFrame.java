@@ -1,6 +1,7 @@
 package com.bank.app.forms;
 
 import com.bank.app.controllers.RegisterFrameController;
+import com.bank.app.utils.WindowProperties;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -111,7 +112,7 @@ public class RegisterFrame extends JFrame {
 
                 boolean registerUser = registerFrameController.registerUser(firstName, secondName, lastName, birthDate, phoneNumber, email, password, confirmPassword);
 
-                if(registerUser){
+                if (registerUser) {
                     JOptionPane.showMessageDialog(null, "Użytkownik został zarejestrowany");
                     SwingUtilities.invokeLater(() -> {
                         loginFrame.setVisible(true);

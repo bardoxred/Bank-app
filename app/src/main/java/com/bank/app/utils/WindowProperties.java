@@ -1,4 +1,4 @@
-package com.bank.app.forms;
+package com.bank.app.utils;
 
 import org.springframework.stereotype.Component;
 

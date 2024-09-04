@@ -1,7 +1,9 @@
 package com.bank.app.forms;
 
+import com.bank.app.controllers.BlikFrameController;
 import com.bank.app.controllers.LoginFrameController;
 import com.bank.app.controllers.RegisterFrameController;
+import com.bank.app.utils.WindowProperties;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -27,10 +29,9 @@ public class LoginFrame extends JFrame {
     private final RegisterFrameController registerFrameController;
 
 
-    public LoginFrame(LoginFrameController loginFrameController, RegisterFrameController registerFrameController) {
+    public LoginFrame(LoginFrameController loginFrameController, RegisterFrameController registerFrameController, BlikFrameController blikFrameController) {
         this.loginFrameController = loginFrameController;
         this.registerFrameController = registerFrameController;
-
 
         this.setTitle(title);
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y);
@@ -75,7 +76,7 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Nieprawidłowe logowanie");
                 } else {
                     SwingUtilities.invokeLater(() -> {
-                        new HomeFrame();
+                        new HomeFrame(LoginFrame.this).setVisible(true);
                         dispose();
                     });
                 }

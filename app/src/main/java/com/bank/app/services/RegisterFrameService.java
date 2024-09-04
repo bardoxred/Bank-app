@@ -13,7 +13,7 @@ import java.util.Date;
 import static com.bank.app.utils.AppUtil.hash256;
 
 @Service
-public class RegisterFormService {
+public class RegisterFrameService {
 
     @Autowired
     private UserRepository userRepository;

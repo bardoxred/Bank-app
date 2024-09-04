@@ -1,7 +1,14 @@
 package com.bank.app.forms;
 
+import com.bank.app.controllers.BlikFrameController;
+import com.bank.app.controllers.HistoriaFrameController;
+import com.bank.app.controllers.PrzelewFrameController;
+import com.bank.app.utils.WindowProperties;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class HomeFrame extends JFrame {
 
@@ -12,12 +19,18 @@ public class HomeFrame extends JFrame {
     private JLabel accountBalance;
     private JTextField accountBalanceTextField;
     private JPanel actionPanel;
-    private JButton blik;
-    private JButton moneyTransfer;
-    private JButton history;
+    private JButton blikButton;
+    private JButton przelewButton;
+    private JButton historiaButton;
+
+    private BlikFrameController blikFrameController;
+    private PrzelewFrameController przelewFrameController;
+    private HistoriaFrameController historiaFrameController;
+    private final LoginFrame loginFrame;
 
 
-    public HomeFrame() {
+    public HomeFrame(LoginFrame loginFrame) {
+        this.loginFrame = loginFrame;
 
         this.setTitle(title); // Tytuł
         this.setSize(WindowProperties.SIZE_X, WindowProperties.SIZE_Y); // wielkość okna
@@ -40,14 +53,43 @@ public class HomeFrame extends JFrame {
         balancePanel.add(accountBalanceTextField);
         homePanel.add(balancePanel, BorderLayout.NORTH);
 
-        blik = new JButton("BLIK");
-        moneyTransfer = new JButton("Przelew");
-        history = new JButton("Historia");
+        blikButton = new JButton("BLIK");
+        blikButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                    new BlikFrame(blikFrameController, HomeFrame.this).setVisible(true);
+                    dispose();
+                });
+            }
+        });
+
+        przelewButton = new JButton("Przelew");
+        przelewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                    new PrzelewFrame(przelewFrameController, HomeFrame.this).setVisible(true);
+                    dispose();
+                });
+            }
+        });
+
+        historiaButton = new JButton("Historia");
+        historiaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> {
+                    new HistoriaFrame(historiaFrameController, HomeFrame.this).setVisible(true);
+                    dispose();
+                });
+            }
+        });
 
         actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Ustawienie panelu dla paska akcji
-        actionPanel.add(blik);
-        actionPanel.add(moneyTransfer);
-        actionPanel.add(history);
+        actionPanel.add(blikButton);
+        actionPanel.add(przelewButton);
+        actionPanel.add(historiaButton);
         homePanel.add(actionPanel);
 
         this.add(homePanel);
